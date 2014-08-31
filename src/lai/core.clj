@@ -51,11 +51,11 @@
         ^TerminalSize terminal-size (.getTerminalSize terminal)]
     (.enterPrivateMode terminal)
     (.clearScreen terminal)
-    (doseq [i (range 100)]
-      (.setForegroundColor terminal (new TextColor$RGB i i i))
-      (.setBackgroundColor terminal (new TextColor$RGB 0 0 0))
-      (.setCursorPosition terminal 1 i)
-      (print-terminal-string terminal "hi there"))
+    (doseq [^int x (range 255) ^int y (range 100)]
+      (.setForegroundColor terminal (new TextColor$RGB x 0 y))
+      (.setBackgroundColor terminal (new TextColor$RGB x 0 y))
+      (.setCursorPosition terminal x y)
+      (.putCharacter terminal \.))
     (.flush terminal)
     (Thread/sleep 200)))
 
