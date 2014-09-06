@@ -1,4 +1,5 @@
 (ns lai.core
+  (:require [taoensso.timbre :as timbre])
   (:import
 
    com.googlecode.lanterna.TerminalSize
@@ -20,11 +21,13 @@
    )
   (:gen-class))
 
+(timbre/refer-timbre)
+
 (defn- print-terminal-string [^Terminal terminal ^String string]
   (doseq [i (range (.length string))]
     (.putCharacter terminal (.charAt string i))))
 
-(defn -main1 [& args]
+(defn -main [& args]
   (let [^TerminalFactory terminal-factory (new DefaultTerminalFactory)
         ^Terminal terminal (.createTerminal terminal-factory)
         ^Screen screen (new DefaultScreen terminal)
@@ -45,7 +48,7 @@
       (finally
        (.stopScreen screen)))))
 
-(defn -main [& args]
+(defn -main1 [& args]
   (let [^TerminalFactory terminal-factory (new DefaultTerminalFactory)
         ^Terminal terminal (.createTerminal terminal-factory)
         ^TerminalSize terminal-size (.getTerminalSize terminal)]
@@ -59,5 +62,12 @@
     (.flush terminal)
     (Thread/sleep 200)))
 
+(defn nrepl [port]
+  (require 'clojure.tools.nrepl.server)
+  (with-out-str
+    ((resolve 'clojure.tools.nrepl.server/start-server) :port port))
+  (info "nREPL server listening on" port))
 
-
+(defn -main2 [& args]
+  (nrepl 7888)
+  (info "Hi there"))

@@ -7,3 +7,40 @@ https://github.com/Raynes/conch
 http://scsh.net/
 http://jawk.sourceforge.net/
 http://confluence.jetbrains.com/display/IDEADEV/Developing+Custom+Language+Plugins+for+IntelliJ+IDEA
+
+https://github.com/LightTable/LightTable
+https://atom.io/
+http://www.jcraft.com/weirdx/
+
+look at eclipse
+look at netbeans
+look at openoffice lol
+look at sublime
+look at xmonad
+
+http://stackoverflow.com/questions/10257880/clojure-editor-written-in-clojure
+https://github.com/arthuredelstein/clooj
+https://github.com/bodil/catnip
+https://github.com/hraberg/deuce
+https://github.com/oakes/Nightcode
+http://per.bothner.com/papers/Freenix00/Freenix00.html
+https://github.com/yi-editor/yi
+
+wishlist:
+* elisp emulation
+* osgi backend isolation?
+* browser interface / notebook
+* tmux integration... of some sort
+* replace intellij for lib browsing
+* cljs integration... of some sort
+* sessions as data structures, resumable
+* RX koolaid
+* heavily virtualized fs, natively support ssh -> ssh -> ssh
+* mosh friendly
+* ooo ability to shade itself with config
+* column editing, multiple selections, macros
+* jgit
+* formatting engines
+* jLine?
+* steal gud mode
+* dired
