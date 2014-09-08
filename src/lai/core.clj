@@ -1,5 +1,6 @@
 (ns lai.core
-  (:require [taoensso.timbre :as timbre])
+  (:require [taoensso.timbre :as timbre]
+            [clojure.core.typed :as ty])
   (:import
 
    com.googlecode.lanterna.TerminalPosition
@@ -18,12 +19,14 @@
    )
   (:gen-class))
 
+(ty/warn-on-unannotated-vars)
 (timbre/refer-timbre)
 
 (defn- print-terminal-string [^Terminal terminal ^String string]
   (doseq [i (range (.length string))]
     (.putCharacter terminal (.charAt string i))))
 
+(ty/ann nrepl [ty/AnyInteger -> nil])
 (defn nrepl [port]
   (require 'clojure.tools.nrepl.server)
   (with-out-str
@@ -34,6 +37,7 @@
 (defrecord Window [^int x ^int y ^int width ^int height buffer])
 (defrecord Frame [])
 
+(ty/ann draw-window [Window TextGraphics -> nil])
 (defn draw-window [^Window window ^TextGraphics text-graphics]
   (.setForegroundColor text-graphics (new TextColor$RGB 0 0 0))
   (.setBackgroundColor text-graphics (new TextColor$RGB 0 0 0))
@@ -61,9 +65,9 @@
     (.startScreen screen)
     (try
       (do
-        (draw-window (Window. 10 10 100 40 (Buffer. "hi there")) text-graphics)
+        (draw-window (Window. 10 10 100 40 (Buffer. "hi there\nI'm multiple lines")) text-graphics)
         (.refresh screen Screen$RefreshType/DELTA)
-        (Thread/sleep 1000))
+        (Thread/sleep 10000))
       (finally
        (.stopScreen screen))))
   (shutdown-agents)
